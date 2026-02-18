@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using Photon.Pun;
+
+public class SpawnPlayers : MonoBehaviour
+{
+    public GameObject[] characterPrefabs;
+
+    public float minX;
+    public float maxX;
+    public float minY;
+    public float maxY;
+    public float minZ;
+    public float maxZ;
+
+
+
+    private void Start()
+    {
+        int selectedCharacter = PlayerPrefs.GetInt("selectedCharacter");
+        GameObject playerPrefab = characterPrefabs[selectedCharacter];
+        Vector3 randomPosition = new Vector3(Random.Range(minX, maxX), Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+        PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
+    }
+}
